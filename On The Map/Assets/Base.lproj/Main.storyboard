@@ -159,15 +159,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="70.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hbf-zc-jbr">
-                                                    <rect key="frame" x="10" y="0.0" width="60" height="60"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapMarker" translatesAutoresizingMaskIntoConstraints="NO" id="hbf-zc-jbr">
+                                                    <rect key="frame" x="10" y="5.5" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="2jS-O2-diL"/>
                                                         <constraint firstAttribute="width" constant="60" id="sgX-Hn-UY6"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIE-5l-m1l">
-                                                    <rect key="frame" x="80" y="39" width="215" height="21"/>
+                                                    <rect key="frame" x="80" y="39.5" width="215" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="oOR-Np-Lni"/>
                                                     </constraints>
@@ -176,7 +176,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PkG-1R-Gbn">
-                                                    <rect key="frame" x="80" y="11" width="215" height="21"/>
+                                                    <rect key="frame" x="80" y="11.5" width="215" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="nYf-Za-soY"/>
                                                     </constraints>
@@ -188,7 +188,7 @@
                                             <constraints>
                                                 <constraint firstItem="PkG-1R-Gbn" firstAttribute="top" secondItem="FcC-GI-JwX" secondAttribute="topMargin" id="64e-h1-S7g"/>
                                                 <constraint firstItem="hbf-zc-jbr" firstAttribute="leading" secondItem="FcC-GI-JwX" secondAttribute="leading" constant="10" id="EgB-W0-0CG"/>
-                                                <constraint firstItem="hbf-zc-jbr" firstAttribute="top" secondItem="FcC-GI-JwX" secondAttribute="top" id="Fmv-IZ-rYg"/>
+                                                <constraint firstItem="hbf-zc-jbr" firstAttribute="top" secondItem="FcC-GI-JwX" secondAttribute="top" constant="5" id="Fmv-IZ-rYg"/>
                                                 <constraint firstItem="NIE-5l-m1l" firstAttribute="leading" secondItem="hbf-zc-jbr" secondAttribute="trailing" constant="10" id="GV0-Qo-XR3"/>
                                                 <constraint firstItem="NIE-5l-m1l" firstAttribute="top" secondItem="PkG-1R-Gbn" secondAttribute="bottom" constant="7" id="RoH-af-5Bd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="PkG-1R-Gbn" secondAttribute="trailing" constant="10" id="a5V-bA-lCW"/>
@@ -223,7 +223,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="yj2-vB-XWW" id="ZBc-sN-Yp9"/>
+                        <outlet property="pinsTableView" destination="yj2-vB-XWW" id="u2v-GM-iBh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ib1-Vy-5Uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,7 +238,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unknown" translatesAutoresizingMaskIntoConstraints="NO" id="avL-ov-LRS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UdacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="avL-ov-LRS">
                                 <rect key="frame" x="40" y="70" width="240" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="wIr-ac-dPg"/>
@@ -305,6 +305,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Unknown" width="533" height="94"/>
+        <image name="UdacityLogo" width="533" height="94"/>
+        <image name="mapMarker" width="512" height="512"/>
     </resources>
 </document>

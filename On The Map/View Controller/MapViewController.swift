@@ -36,7 +36,7 @@ extension MapViewController: MKMapViewDelegate {
             let currentPin = pin as! NSDictionary
             
             if(currentPin.count < 10){
-                break
+                continue
             }
             
             let lat = CLLocationDegrees(currentPin["latitude"] as! Double)

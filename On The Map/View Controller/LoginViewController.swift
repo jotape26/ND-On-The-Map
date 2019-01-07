@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     let defaults = UserDefaults.standard
@@ -50,14 +50,14 @@ class LoginViewController: UIViewController {
                 return
             }
             
-                let parsedData = try! JSONSerialization.jsonObject(with: data!.subdata(in: 5..<data!.count), options: .allowFragments) as! [String : AnyObject]
+            let parsedData = try! JSONSerialization.jsonObject(with: data!.subdata(in: 5..<data!.count), options: .allowFragments) as! [String : AnyObject]
+            
+            if let account = parsedData["account"] as? [String: AnyObject] {
+                self.defaults.set(account["key"]!, forKey: "userKey")
                 
-                if let account = parsedData["account"] as? [String: AnyObject] {
-                    self.defaults.set(account["key"]!, forKey: "userKey")
-                    
-                    DispatchQueue.main.sync {
-                        self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
-                    }
+                DispatchQueue.main.sync {
+                    self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
+                }
             }
             
         }

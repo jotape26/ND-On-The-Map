@@ -12,8 +12,10 @@ class TableViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var studentPins: NSArray = []
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pinsTableView: UITableView!
     override func viewDidLoad() {
+        pinsTableView.delegate = self
+        pinsTableView.dataSource = self
         populateScreen()
         
     }
@@ -24,8 +26,7 @@ class TableViewController: UIViewController {
     @objc func populateScreen(){
         if let studentPins = appDelegate.studentPins {
             self.studentPins = studentPins
-            
-            self.tableView.reloadData()
+            self.pinsTableView.reloadData()
             
         }
     }
@@ -38,10 +39,11 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath) as! StudentDataTableViewCell
+        let cell = pinsTableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath) as! StudentDataTableViewCell
         
         let currentPin = studentPins[indexPath.row] as! NSDictionary
-        cell.txtStudentName.text = currentPin["firstName"] as? String
+        let name = "\(currentPin["firstName"] as! String) \(currentPin["lastName"] as! String)"
+        cell.txtStudentName.text = name
         cell.txtStudentLink.text = currentPin["mediaURL"] as? String
         return cell
     }
