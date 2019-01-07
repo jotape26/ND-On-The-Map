@@ -12,10 +12,18 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtEmail.delegate = self
+        txtPassword.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        txtEmail.text = ""
+        txtPassword.text = ""
     }
 
     @IBAction func loginButtonClicked(_ sender: Any) {
@@ -42,11 +50,28 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print(String(data: data!, encoding: .utf8)!)
+                let parsedData = try! JSONSerialization.jsonObject(with: data!.subdata(in: 5..<data!.count), options: .allowFragments) as! [String : AnyObject]
+                
+                if let account = parsedData["account"] as? [String: AnyObject] {
+                    self.defaults.set(account["key"]!, forKey: "userKey")
+                    
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
+                    }
+            }
+            
         }
         
         task.resume()
         
     }
     
+}
+
+// MARK: - TextFieldDelegate Methods
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

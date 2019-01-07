@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4zx-Iw-nuq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MvX-tc-qIZ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,10 +39,13 @@
                             <barButtonItem systemItem="refresh" id="am1-Pf-SxN"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="studentMap" destination="djh-Bw-QOE" id="ef7-wZ-NfL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559" y="-673"/>
+            <point key="canvasLocation" x="1584" y="-592"/>
         </scene>
         <!--AddItemView-->
         <scene sceneID="66r-Xf-jIW">
@@ -56,7 +59,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="kL2-Iq-4qG">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="RyZ-8E-3UG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="RyZ-8E-3UG">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="lTa-5c-zjA" id="OfQ-oW-jFb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bc6-5i-7vL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -77,7 +84,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ya1-Mr-rxr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559" y="134"/>
+            <point key="canvasLocation" x="1583" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OmU-du-KCz">
@@ -98,17 +105,25 @@
         <!--On The Map-->
         <scene sceneID="wnJ-4c-gHC">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ff5-tB-TSv" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ff5-tB-TSv" customClass="MainTabViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="mdU-A6-Fc6">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="MeL-lf-0W0"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="MeL-lf-0W0">
+                            <connections>
+                                <action selector="logoutButtonClicked:" destination="ff5-tB-TSv" id="1uO-Dr-2FT"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="DK4-PN-5YM">
                                 <connections>
                                     <segue destination="Chn-Tq-Efg" kind="presentation" id="P0u-6b-CDm"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="UaH-Be-DsD"/>
+                            <barButtonItem systemItem="refresh" id="UaH-Be-DsD">
+                                <connections>
+                                    <action selector="refreshButtonClicked:" destination="ff5-tB-TSv" id="ZfX-5s-idv"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="P27-AJ-zOA">
@@ -137,12 +152,28 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PrW-9V-0dY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentLocationCell" textLabel="bUi-7B-Xb0" detailTextLabel="qQB-6c-oxy" style="IBUITableViewCellStyleValue1" id="PrW-9V-0dY">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PrW-9V-0dY" id="FcC-GI-JwX">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUi-7B-Xb0">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qQB-6c-oxy">
+                                                    <rect key="frame" x="261" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -165,10 +196,13 @@
                             <barButtonItem systemItem="refresh" id="FZ2-ba-4vn"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="yj2-vB-XWW" id="ZBc-sN-Yp9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ib1-Vy-5Uw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1558" y="904"/>
+            <point key="canvasLocation" x="1583" y="933"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ziI-7T-wEh">

@@ -7,21 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FABC0AA521E2C40A00F786A3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */; };
 		FAD6D0E121E2940B00D61B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */; };
-		FAD6D0E321E2940B00D61B31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E221E2940B00D61B31 /* ViewController.swift */; };
+		FAD6D0E321E2940B00D61B31 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E221E2940B00D61B31 /* LoginViewController.swift */; };
 		FAD6D0E621E2940C00D61B31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D0E421E2940C00D61B31 /* Main.storyboard */; };
 		FAD6D0E821E2941100D61B31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D0E721E2941100D61B31 /* Assets.xcassets */; };
 		FAD6D0EB21E2941100D61B31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D0E921E2941100D61B31 /* LaunchScreen.storyboard */; };
+		FAD6D0F421E29DD400D61B31 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0F321E29DD400D61B31 /* MapViewController.swift */; };
+		FAD6D0F621E29DE000D61B31 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0F521E29DE000D61B31 /* TableViewController.swift */; };
+		FAD6D0F821E29DFC00D61B31 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0F721E29DFC00D61B31 /* AddPinViewController.swift */; };
+		FAD6D0FA21E29E0400D61B31 /* ConfirmPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0F921E29E0400D61B31 /* ConfirmPinViewController.swift */; };
+		FAD6D0FD21E2A8B900D61B31 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0FC21E2A8B900D61B31 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		FAD6D0DD21E2940B00D61B31 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAD6D0E221E2940B00D61B31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAD6D0E221E2940B00D61B31 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FAD6D0E521E2940C00D61B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAD6D0E721E2941100D61B31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAD6D0EA21E2941100D61B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAD6D0EC21E2941100D61B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD6D0F321E29DD400D61B31 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FAD6D0F521E29DE000D61B31 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		FAD6D0F721E29DFC00D61B31 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		FAD6D0F921E29E0400D61B31 /* ConfirmPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinViewController.swift; sourceTree = "<group>"; };
+		FAD6D0FC21E2A8B900D61B31 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +67,35 @@
 			isa = PBXGroup;
 			children = (
 				FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */,
-				FAD6D0E221E2940B00D61B31 /* ViewController.swift */,
-				FAD6D0E421E2940C00D61B31 /* Main.storyboard */,
-				FAD6D0E721E2941100D61B31 /* Assets.xcassets */,
-				FAD6D0E921E2941100D61B31 /* LaunchScreen.storyboard */,
+				FAD6D0FB21E29E0B00D61B31 /* View Controller */,
+				FAD6D0F221E29DAD00D61B31 /* Assets */,
 				FAD6D0EC21E2941100D61B31 /* Info.plist */,
+				FAD6D0FC21E2A8B900D61B31 /* Constants.swift */,
 			);
 			path = "On The Map";
+			sourceTree = "<group>";
+		};
+		FAD6D0F221E29DAD00D61B31 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FAD6D0E421E2940C00D61B31 /* Main.storyboard */,
+				FAD6D0E921E2941100D61B31 /* LaunchScreen.storyboard */,
+				FAD6D0E721E2941100D61B31 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		FAD6D0FB21E29E0B00D61B31 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FAD6D0E221E2940B00D61B31 /* LoginViewController.swift */,
+				FAD6D0F321E29DD400D61B31 /* MapViewController.swift */,
+				FAD6D0F521E29DE000D61B31 /* TableViewController.swift */,
+				FAD6D0F721E29DFC00D61B31 /* AddPinViewController.swift */,
+				FAD6D0F921E29E0400D61B31 /* ConfirmPinViewController.swift */,
+				FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +169,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAD6D0E321E2940B00D61B31 /* ViewController.swift in Sources */,
+				FAD6D0E321E2940B00D61B31 /* LoginViewController.swift in Sources */,
+				FABC0AA521E2C40A00F786A3 /* MainTabViewController.swift in Sources */,
+				FAD6D0F821E29DFC00D61B31 /* AddPinViewController.swift in Sources */,
+				FAD6D0F421E29DD400D61B31 /* MapViewController.swift in Sources */,
 				FAD6D0E121E2940B00D61B31 /* AppDelegate.swift in Sources */,
+				FAD6D0FD21E2A8B900D61B31 /* Constants.swift in Sources */,
+				FAD6D0F621E29DE000D61B31 /* TableViewController.swift in Sources */,
+				FAD6D0FA21E29E0400D61B31 /* ConfirmPinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ struct Constants {
     
     struct ApiURL {
         let loginURL: URL = URL(string: "https://onthemap-api.udacity.com/v1/session")!
+        let studentLocationURL: URL = URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?Limit=10")!
     }
     
 }

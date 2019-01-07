@@ -10,21 +10,45 @@ import UIKit
 
 class TableViewController: UIViewController {
 
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var studentPins: NSArray = []
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let studentPins = appDelegate.studentPins {
+            self.studentPins = studentPins
+            tableView.reloadData()
+        }
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(populateScreen), name: .studentDataDownloaded, object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func populateScreen(){
+        if let studentPins = appDelegate.studentPins {
+            self.studentPins = studentPins
+            DispatchQueue.main.sync {
+                self.tableView.reloadData()
+            }
+        }
     }
-    */
 
+}
+
+extension TableViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.studentPins.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath)
+        
+        let currentPin = studentPins[indexPath.row] as! NSDictionary
+        cell.textLabel?.text = currentPin["firstName"] as? String
+        return cell
+    }
+    
+    
 }
