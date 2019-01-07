@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FABC0AA521E2C40A00F786A3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */; };
+		FABC0AAC21E2EC5400F786A3 /* StudentDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */; };
 		FAD6D0E121E2940B00D61B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */; };
 		FAD6D0E321E2940B00D61B31 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E221E2940B00D61B31 /* LoginViewController.swift */; };
 		FAD6D0E621E2940C00D61B31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAD6D0E421E2940C00D61B31 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentDataTableViewCell.swift; path = "On The Map/Model/StudentDataTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		FAD6D0DD21E2940B00D61B31 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD6D0E221E2940B00D61B31 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FABC0AAA21E2EC1600F786A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */,
+			);
+			name = Model;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		FAD6D0D421E2940B00D61B31 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +80,7 @@
 				FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */,
 				FAD6D0FB21E29E0B00D61B31 /* View Controller */,
 				FAD6D0F221E29DAD00D61B31 /* Assets */,
+				FABC0AAA21E2EC1600F786A3 /* Model */,
 				FAD6D0EC21E2941100D61B31 /* Info.plist */,
 				FAD6D0FC21E2A8B900D61B31 /* Constants.swift */,
 			);
@@ -170,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD6D0E321E2940B00D61B31 /* LoginViewController.swift in Sources */,
+				FABC0AAC21E2EC5400F786A3 /* StudentDataTableViewCell.swift in Sources */,
 				FABC0AA521E2C40A00F786A3 /* MainTabViewController.swift in Sources */,
 				FAD6D0F821E29DFC00D61B31 /* AddPinViewController.swift in Sources */,
 				FAD6D0F421E29DD400D61B31 /* MapViewController.swift in Sources */,
