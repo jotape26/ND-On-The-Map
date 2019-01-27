@@ -12,12 +12,14 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var btnLogin: UIButton!
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         txtEmail.delegate = self
         txtPassword.delegate = self
+        btnLogin.layer.cornerRadius = 4
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -27,6 +29,8 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonClicked(_ sender: Any) {
+        btnLogin.isEnabled = false
+        btnLogin.titleLabel?.text = "Logging in..."
         guard let email = txtEmail.text else {
             print("email empty")
             return
@@ -37,44 +41,34 @@ class LoginViewController: UIViewController {
             return
         }
         
-        var request = URLRequest(url: Constants.ApiURL.init().loginURL)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: request) { (data, res, err) in
-            if err != nil {
-                print(err.debugDescription)
-                return
-            }
-            
-            let parsedData = try! JSONSerialization.jsonObject(with: data!.subdata(in: 5..<data!.count), options: .allowFragments) as! [String : AnyObject]
-            
-            if let account = parsedData["account"] as? [String: AnyObject] {
-                self.defaults.set(account["key"]!, forKey: "userKey")
-                
-                DispatchQueue.main.sync {
-                    self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
-                }
-            } else if (parsedData["error"] as? String) != nil {
-                let alert = UIAlertController(title: "Uh oh!",
-                                              message: "It appears that the credentials you entered are invalid. Please verify your credentials and try again.",
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                                
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: {
-                        self.txtEmail.text = ""
-                        self.txtPassword.text = ""
-                    })
-                }
-            }
+        UserService().userLogin(email: email,
+                                password: password, success: { (res) in
+                                    if let account = res["account"] as? [String: AnyObject] {
+                                        self.defaults.set(account["key"]!, forKey: "userKey")
+                                        
+                                        DispatchQueue.main.sync {
+                                            self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
+                                        }
+                                    } else if (res["error"] as? String) != nil {
+                                        let alert = UIAlertController(title: "Uh oh!",
+                                                                      message: "It appears that the credentials you entered are invalid. Please verify your credentials and try again.",
+                                                                      preferredStyle: .alert)
+                                        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                                        
+                                        DispatchQueue.main.async {
+                                            self.present(alert, animated: true, completion: nil)
+                                            self.txtEmail.becomeFirstResponder()
+                                            self.btnLogin.isEnabled = true
+                                            self.btnLogin.titleLabel?.text = "LOG IN"
+                                            self.txtEmail.text = ""
+                                            self.txtPassword.text = ""
+                                        }
+                                    }
+        }) { (err) in
+            print(err.localizedDescription)
+            self.btnLogin.isEnabled = true
+            self.btnLogin.titleLabel?.text = "LOG IN"
         }
-        
-        task.resume()
-        
     }
     
 }

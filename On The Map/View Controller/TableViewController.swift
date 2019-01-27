@@ -54,11 +54,7 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
             cell.txtStudentLink.text = ""
         }
         
-        return cell
-        
-//        guard let first = currentPin["firstName"] else { return cell }
-//        guard let last = currentPin["lastName"] else { return cell }
-        
+        return cell        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

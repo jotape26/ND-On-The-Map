@@ -16,6 +16,7 @@ class MainTabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUserInfo()
         fetchStudentData()
     }
 
@@ -29,21 +30,8 @@ class MainTabViewController: UITabBarController {
     }
     
     func fetchStudentData(){
-        var request = URLRequest(url: Constants.ApiURL().studentLocationURL)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: request) { data, res, err in
-            
-            if err != nil {
-                print(err!)
-                return
-            }
-            
-            let parsedData = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : AnyObject]
-            
-            if let _ = parsedData["error"] {
+        PinsService().getStudentPins(success: { (res) in
+            if let _ = res["error"] {
                 let alert = UIAlertController(title: "Uh oh!",
                                               message: "Something went wrong while downloading the pins. Please try again.",
                                               preferredStyle: .alert)
@@ -55,13 +43,29 @@ class MainTabViewController: UITabBarController {
                     })
                 }
             } else {
-                self.appDelegate.studentPins = StudentInformation.pinsFromResults(parsedData["results"] as! NSArray)
+                self.appDelegate.studentPins = StudentInformation.pinsFromResults(res["results"] as! NSArray)
                 
                 let notification = Notification.init(name: .studentDataDownloaded)
                 self.notificationCenter.post(notification)
             }
+        }) { (err) in
+            print(err.localizedDescription)
         }
-        task.resume()
+    }
+    
+    func fetchUserInfo(){
+        guard let key = self.defaults.string(forKey: "userKey") else { return }
+        
+        UserService().getUserDetails(key: key,
+                                     success: { (res) in
+                                        
+                                        guard let firstName = res["first_name"], let lastName = res["last_name"] else { return }
+
+                                        self.defaults.set(firstName, forKey: "userFirstName")
+                                        self.defaults.set(lastName, forKey: "userLastName")
+        }) { (err) in
+            print(err.localizedDescription)
+        }
     }
 }
 
