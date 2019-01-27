@@ -61,7 +61,15 @@ class ConfirmPinViewController: UIViewController {
                                             self.present(alert, animated: true, completion: nil)
                                         }
             }) { (err) in
-                print(err.localizedDescription)
+                let alert = UIAlertController(title: "Error posting Pin",
+                                              message: "Something went wrong while trying to send your pin. Please try again later.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         } else {
             DispatchQueue.main.async {

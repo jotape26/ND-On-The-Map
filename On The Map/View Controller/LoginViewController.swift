@@ -65,9 +65,15 @@ class LoginViewController: UIViewController {
                                         }
                                     }
         }) { (err) in
-            print(err.localizedDescription)
-            self.btnLogin.isEnabled = true
-            self.btnLogin.titleLabel?.text = "LOG IN"
+            let alert = UIAlertController(title: "Uh Oh!",
+                                          message: "Something went wrong while trying to log you in. Please try again later",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+                self.btnLogin.isEnabled = true
+                self.btnLogin.titleLabel?.text = "LOG IN"
+            }
         }
     }
     

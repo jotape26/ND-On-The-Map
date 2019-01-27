@@ -26,6 +26,7 @@ class MainTabViewController: UITabBarController {
     }
     
     @IBAction func refreshButtonClicked(_ sender: Any) {
+        fetchUserInfo()
         fetchStudentData()
     }
     
@@ -49,7 +50,16 @@ class MainTabViewController: UITabBarController {
                 self.notificationCenter.post(notification)
             }
         }) { (err) in
-            print(err.localizedDescription)
+            let alert = UIAlertController(title: "Uh oh!",
+                                          message: "Something went wrong while downloading the pins. Please try again.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: {
+                    self.appDelegate.studentPins = []
+                })
+            }
         }
     }
     
@@ -63,8 +73,18 @@ class MainTabViewController: UITabBarController {
 
                                         self.defaults.set(firstName, forKey: "userFirstName")
                                         self.defaults.set(lastName, forKey: "userLastName")
+                                        print("User Name saved!")
         }) { (err) in
-            print(err.localizedDescription)
+            let alert = UIAlertController(title: "Uh oh!",
+                                          message: "Something went wrong while trying to download your user information. Please try again later.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: {
+                    self.appDelegate.studentPins = []
+                })
+            }
         }
     }
 }
