@@ -11,7 +11,7 @@ import UIKit
 class TableViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var studentPins: NSArray = []
+    var studentPins: [StudentInformation] = []
     @IBOutlet weak var pinsTableView: UITableView!
     override func viewDidLoad() {
         pinsTableView.delegate = self
@@ -41,12 +41,32 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = pinsTableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath) as! StudentDataTableViewCell
         
-        let currentPin = studentPins[indexPath.row] as! NSDictionary
-        let name = "\(currentPin["firstName"] as! String) \(currentPin["lastName"] as! String)"
-        cell.txtStudentName.text = name
-        cell.txtStudentLink.text = currentPin["mediaURL"] as? String
+        let currentPin = studentPins[indexPath.row]
+        
+        if let first = currentPin.firstName, let last = currentPin.lastName{
+            let name = "\(first) \(last)"
+            cell.txtStudentName.text = name
+            if let url = currentPin.mediaURL {
+                cell.txtStudentLink.text = url
+            }
+        } else {
+            cell.txtStudentName.text = "Error fetching name from API"
+            cell.txtStudentLink.text = ""
+        }
+        
         return cell
+        
+//        guard let first = currentPin["firstName"] else { return cell }
+//        guard let last = currentPin["lastName"] else { return cell }
+        
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let selectedPin = self.studentPins[indexPath.row]
+        guard let toOpen = selectedPin.mediaURL else { return }
+        UIApplication.shared.open(URL(string: toOpen)!)
+    }
     
 }

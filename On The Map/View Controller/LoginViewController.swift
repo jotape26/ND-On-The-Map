@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         
         let task = session.dataTask(with: request) { (data, res, err) in
             if err != nil {
-                print(err!)
+                print(err.debugDescription)
                 return
             }
             
@@ -58,8 +58,19 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.sync {
                     self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
                 }
+            } else if (parsedData["error"] as? String) != nil {
+                let alert = UIAlertController(title: "Uh oh!",
+                                              message: "It appears that the credentials you entered are invalid. Please verify your credentials and try again.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                                
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: {
+                        self.txtEmail.text = ""
+                        self.txtPassword.text = ""
+                    })
+                }
             }
-            
         }
         
         task.resume()

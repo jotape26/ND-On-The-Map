@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0AA30321FE17BA00A7976D /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0AA30221FE17BA00A7976D /* StudentInformation.swift */; };
 		FABC0AA521E2C40A00F786A3 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */; };
 		FABC0AAC21E2EC5400F786A3 /* StudentDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */; };
 		FAD6D0E121E2940B00D61B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD6D0E021E2940B00D61B31 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0AA30221FE17BA00A7976D /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInformation.swift; path = "On The Map/Model/StudentInformation.swift"; sourceTree = SOURCE_ROOT; };
 		FABC0AA421E2C40A00F786A3 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentDataTableViewCell.swift; path = "On The Map/Model/StudentDataTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		FAD6D0DD21E2940B00D61B31 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				FABC0AAB21E2EC5400F786A3 /* StudentDataTableViewCell.swift */,
+				FA0AA30221FE17BA00A7976D /* StudentInformation.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -189,6 +192,7 @@
 				FAD6D0E121E2940B00D61B31 /* AppDelegate.swift in Sources */,
 				FAD6D0FD21E2A8B900D61B31 /* Constants.swift in Sources */,
 				FAD6D0F621E29DE000D61B31 /* TableViewController.swift in Sources */,
+				FA0AA30321FE17BA00A7976D /* StudentInformation.swift in Sources */,
 				FAD6D0FA21E29E0400D61B31 /* ConfirmPinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

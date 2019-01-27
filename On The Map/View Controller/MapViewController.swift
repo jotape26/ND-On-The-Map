@@ -12,7 +12,7 @@ import MapKit
 class MapViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var studentPins: NSArray?
+    var studentPins: [StudentInformation]?
     
     @IBOutlet weak var studentMap: MKMapView!
     
@@ -33,25 +33,20 @@ extension MapViewController: MKMapViewDelegate {
         studentPins = appDelegate.studentPins!
         var annotations = [MKPointAnnotation]()
         for pin in studentPins! {
-            let currentPin = pin as! NSDictionary
             
-            if(currentPin.count < 10){
-                continue
-            }
+            guard let first = pin.firstName, let last = pin.lastName else { continue }
             
-            let lat = CLLocationDegrees(currentPin["latitude"] as! Double)
-            let long = CLLocationDegrees(currentPin["longitude"] as! Double)
+            let lat = CLLocationDegrees(pin.latitude!)
+            let long = CLLocationDegrees(pin.longitude!)
             
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
-            let first = currentPin["firstName"] as! String
-            let last = currentPin["lastName"] as! String
-            let mediaURL = currentPin["mediaURL"] as! String
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
+            if let url = pin.mediaURL {
+                annotation.subtitle = url
+            }
             
             annotations.append(annotation)
         }

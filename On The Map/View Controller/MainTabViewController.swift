@@ -29,7 +29,7 @@ class MainTabViewController: UITabBarController {
     }
     
     func fetchStudentData(){
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        var request = URLRequest(url: Constants.ApiURL().studentLocationURL)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
@@ -42,11 +42,24 @@ class MainTabViewController: UITabBarController {
             }
             
             let parsedData = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : AnyObject]
-            self.appDelegate.studentPins = parsedData["results"] as? NSArray
             
-            let notification = Notification.init(name: .studentDataDownloaded)
-            self.notificationCenter.post(notification)
-            
+            if let _ = parsedData["error"] {
+                let alert = UIAlertController(title: "Uh oh!",
+                                              message: "Something went wrong while downloading the pins. Please try again.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: {
+                        self.appDelegate.studentPins = []
+                    })
+                }
+            } else {
+                self.appDelegate.studentPins = StudentInformation.pinsFromResults(parsedData["results"] as! NSArray)
+                
+                let notification = Notification.init(name: .studentDataDownloaded)
+                self.notificationCenter.post(notification)
+            }
         }
         task.resume()
     }
