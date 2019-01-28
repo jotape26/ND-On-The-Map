@@ -30,6 +30,9 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     
     @objc func populateMap(){
+        DispatchQueue.main.async {
+            self.studentMap.removeAnnotations(self.studentMap.annotations)
+        }
         studentPins = appDelegate.studentPins!
         var annotations = [MKPointAnnotation]()
         for pin in studentPins! {
@@ -73,11 +76,29 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let toOpen = view.annotation?.subtitle! {
-                let websiteURL = URL(string: toOpen)!
-                UIApplication.shared.open(websiteURL)
+            if let toOpen = view.annotation {
+                if let subtitle = toOpen.subtitle ?? "" {
+                    if !subtitle.isEmpty{
+                        let websiteURL = URL(string: subtitle)!
+                        UIApplication.shared.open(websiteURL)
+                    } else {
+                        showURLError()
+                    }
+                } else {
+                    showURLError()
+                }
+            } else {
+                showURLError()
             }
         }
+    }
+    
+    func showURLError(){
+        let alert = UIAlertController(title: "Uh Oh!",
+                                      message: "It looks like another student sent us an invalid URL. Please select another url!",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

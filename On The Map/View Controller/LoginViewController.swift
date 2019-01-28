@@ -29,17 +29,40 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonClicked(_ sender: Any) {
-        btnLogin.isEnabled = false
-        btnLogin.titleLabel?.text = "Logging in..."
-        guard let email = txtEmail.text else {
-            print("email empty")
-            return
+        var email = ""
+        var password = ""
+        
+        
+        if let emailText = txtEmail.text {
+            if emailText != "" {
+                email = emailText
+            } else {
+                let alert = UIAlertController(title: "Empty Email",
+                                              message: "Please fill out the Email Box",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
         }
         
-        guard let password = txtPassword.text else {
-            print("password empty")
-            return
+        if let passwordText = txtPassword.text {
+            if passwordText != "" {
+                password = passwordText
+            } else {
+                let alert = UIAlertController(title: "Empty Password",
+                                              message: "Please fill out the Password Box",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
         }
+        
+        let actIndicator = UIActivityIndicatorView(style: .gray)
+        self.view.addSubview(actIndicator)
+        actIndicator.frame = view.bounds
+        actIndicator.startAnimating()
         
         UserService().userLogin(email: email,
                                 password: password, success: { (res) in
@@ -47,6 +70,7 @@ class LoginViewController: UIViewController {
                                         self.defaults.set(account["key"]!, forKey: "userKey")
                                         
                                         DispatchQueue.main.sync {
+                                            actIndicator.removeFromSuperview()
                                             self.performSegue(withIdentifier: "LoginToMainSegue", sender: nil)
                                         }
                                     } else if (res["error"] as? String) != nil {
@@ -57,11 +81,9 @@ class LoginViewController: UIViewController {
                                         
                                         DispatchQueue.main.async {
                                             self.present(alert, animated: true, completion: nil)
-                                            self.txtEmail.becomeFirstResponder()
-                                            self.btnLogin.isEnabled = true
-                                            self.btnLogin.titleLabel?.text = "LOG IN"
-                                            self.txtEmail.text = ""
+                                            actIndicator.removeFromSuperview()
                                             self.txtPassword.text = ""
+                                            self.txtPassword.becomeFirstResponder()
                                         }
                                     }
         }) { (err) in
@@ -71,6 +93,7 @@ class LoginViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .cancel))
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: nil)
+                actIndicator.removeFromSuperview()
                 self.btnLogin.isEnabled = true
                 self.btnLogin.titleLabel?.text = "LOG IN"
             }

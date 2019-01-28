@@ -26,11 +26,11 @@ class TableViewController: UIViewController {
     @objc func populateScreen(){
         if let studentPins = appDelegate.studentPins {
             self.studentPins = studentPins
-            self.pinsTableView.reloadData()
-            
+            DispatchQueue.main.async {
+                self.pinsTableView.reloadData()
+            }
         }
     }
-    
 }
 
 extension TableViewController: UITableViewDelegate, UITableViewDataSource {

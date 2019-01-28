@@ -31,6 +31,11 @@ class MainTabViewController: UITabBarController {
     }
     
     func fetchStudentData(){
+        let actIndicator = UIActivityIndicatorView(style: .gray)
+        self.view.addSubview(actIndicator)
+        actIndicator.frame = view.bounds
+        actIndicator.startAnimating()
+        
         PinsService().getStudentPins(success: { (res) in
             if let _ = res["error"] {
                 let alert = UIAlertController(title: "Uh oh!",
@@ -41,12 +46,16 @@ class MainTabViewController: UITabBarController {
                 DispatchQueue.main.async {
                     self.present(alert, animated: true, completion: {
                         self.appDelegate.studentPins = []
+                        actIndicator.removeFromSuperview()
                     })
                 }
             } else {
                 self.appDelegate.studentPins = StudentInformation.pinsFromResults(res["results"] as! NSArray)
                 
                 let notification = Notification.init(name: .studentDataDownloaded)
+                DispatchQueue.main.async {
+                    actIndicator.removeFromSuperview()
+                }
                 self.notificationCenter.post(notification)
             }
         }) { (err) in
@@ -57,6 +66,7 @@ class MainTabViewController: UITabBarController {
             
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: {
+                    actIndicator.removeFromSuperview()
                     self.appDelegate.studentPins = []
                 })
             }
