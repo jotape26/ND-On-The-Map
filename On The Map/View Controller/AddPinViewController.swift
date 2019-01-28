@@ -59,6 +59,7 @@ extension AddPinViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: {
                     DispatchQueue.main.async {
+                        self.toggleActivityIndicator(self.activityIndicator)
                         self.txtLocation.text = ""
                     }
                 })
@@ -66,8 +67,10 @@ extension AddPinViewController {
             }
             
             if !(mark?.isEmpty)! {
+                DispatchQueue.main.async {
+                    self.toggleActivityIndicator(self.activityIndicator)
+                }
                 self.parsedLocation = mark?.first?.location
-                self.toggleActivityIndicator(self.activityIndicator)
                 self.performSegue(withIdentifier: "SearchToConfirmPinSegue", sender: nil)
             } else {
                 let alert = UIAlertController(title: "Location Not Found",
@@ -77,6 +80,7 @@ extension AddPinViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: {
                     DispatchQueue.main.async {
+                        self.toggleActivityIndicator(self.activityIndicator)
                         self.txtLocation.text = ""
                     }
                 })
