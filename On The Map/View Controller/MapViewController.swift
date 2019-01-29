@@ -53,7 +53,9 @@ extension MapViewController: MKMapViewDelegate {
             
             annotations.append(annotation)
         }
-        self.studentMap.addAnnotations(annotations)
+        DispatchQueue.main.async {
+            self.studentMap.addAnnotations(annotations)
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

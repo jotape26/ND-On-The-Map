@@ -21,6 +21,7 @@ class PinsService {
             
             if err != nil {
                 failure(err!)
+                return
             }
             
             let parsedData = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : AnyObject]
@@ -46,6 +47,7 @@ class PinsService {
         let task = session.dataTask(with: request) { data, res, err in
             if err != nil { // Handle error…
                 failure(err!)
+                return
             }
             
             let parsedData = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String : AnyObject]

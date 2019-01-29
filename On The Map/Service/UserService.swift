@@ -43,6 +43,7 @@ class UserService{
         let task = session.dataTask(with: request) { data, res, err in
             if err != nil {
                 failure(err!)
+                return
             }
             let parsedData = try! JSONSerialization.jsonObject(with: data!.subdata(in: 5..<data!.count), options: .allowFragments) as! [String : AnyObject]
             success(parsedData)
